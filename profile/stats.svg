@@ -2,13 +2,13 @@
 <title>~/cavemangames/stats</title>
 <rect x="0.5" y="0.5" width="479" height="165" rx="10" fill="#0B100C" stroke="#16321D"/>
 <text x="24" y="34" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#4E7359" letter-spacing="1.5">~/cavemangames/stats</text>
-<text x="24" y="84" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="30" font-weight="700" fill="#C8E6CE">6</text>
+<text x="24" y="84" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="30" font-weight="700" fill="#C8E6CE">14</text>
 <text x="24" y="106" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#96B79F">repositories</text>
 <text x="132" y="84" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="30" font-weight="700" fill="#C8E6CE">6</text>
 <text x="132" y="106" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#96B79F">public</text>
-<text x="240" y="84" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="30" font-weight="700" fill="#C8E6CE">0</text>
+<text x="240" y="84" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="30" font-weight="700" fill="#C8E6CE">8</text>
 <text x="240" y="106" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#96B79F">private</text>
-<text x="348" y="84" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="30" font-weight="700" fill="#C8E6CE">3</text>
+<text x="348" y="84" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="30" font-weight="700" fill="#C8E6CE">13</text>
 <text x="348" y="106" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#96B79F">languages</text>
 <line x1="24" y1="124" x2="456" y2="124" stroke="#16321D"/>
 <text x="24" y="146" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#4E7359">$ git log --since=2011 · updated 2026-10-31</text>
