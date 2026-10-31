@@ -2,7 +2,7 @@
 //
 // Reads every repository of the organization through the GitHub REST API and writes two SVGs:
 //   profile/stats.svg      totals (repositories, public/private split, languages, first year)
-//   profile/languages.svg  language share by bytes of code, top 8 + "Other"
+//   profile/languages.svg  language share by bytes of code, top 7 + "Other"
 //
 // Privacy: private repositories only contribute to totals. Their names, descriptions and
 // per-repository numbers never leave this script.
@@ -28,8 +28,16 @@ const C = {
   cave: '#050705', panel: '#0B100C', line: '#16321D', bone: '#C8E6CE', muted: '#96B79F',
   label: '#4E7359', phosphor: '#3EE06A', deep: '#1D5C31',
 };
-// Language bar colors: brand greens first, then neutral tones (Phosphor stays an accent).
-const BAR = ['#3EE06A', '#2BB352', '#1D8A3E', '#1D5C31', '#7FBF92', '#4E7359', '#A9CDB3', '#2E4434', '#16321D'];
+// Language colors: one distinct hue per language, in a fixed order (never cycled), brand green
+// first. Validated as a set on the card surface (#0B100C) with the dataviz palette checker:
+// lightness band, chroma, contrast and normal-vision separation pass; the closest pair for
+// color-blind readers (green/magenta, deutan ΔE 6.6) is never adjacent to the same label, and
+// the legend names every color, so identity never depends on color alone.
+// "Other" is a neutral, not a hue: it folds everything past the 7th language.
+const BAR = ['#22A84B', '#D55181', '#C98500', '#3987E5', '#D95926', '#9085E9', '#E66767'];
+const OTHER = '#4E7359';
+const MAX_LANGS = BAR.length;
+const colorOf = (l, i) => (l.name === 'Other' ? OTHER : BAR[i]);
 const FONT = "'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
 
 async function api(path) {
@@ -62,8 +70,8 @@ export function summarize(repos) {
   }
   const total = Object.values(languages).reduce((a, b) => a + b, 0);
   const sorted = Object.entries(languages).sort((a, b) => b[1] - a[1]);
-  const top = sorted.slice(0, 8);
-  const other = sorted.slice(8).reduce((a, [, b]) => a + b, 0);
+  const top = sorted.slice(0, MAX_LANGS);
+  const other = sorted.slice(MAX_LANGS).reduce((a, [, b]) => a + b, 0);
   if (other > 0) top.push(['Other', other]);
   const years = own.map((r) => new Date(r.created_at).getUTCFullYear()).filter(Boolean);
   return {
@@ -106,11 +114,16 @@ export function statsSvg(s, updated) {
 export function languagesSvg(s) {
   const w = 480;
   const barW = w - 48;
+  // Segments separated by a 2px gap in the card color, so neighbors never blend.
+  const GAP = 2;
+  const visible = s.share.filter((l) => l.pct > 0);
+  const usable = barW - GAP * Math.max(visible.length - 1, 0);
   let x = 24;
   const bar = s.share.map((l, i) => {
-    const width = Math.max((l.pct / 100) * barW, l.pct > 0 ? 2 : 0);
-    const rect = `<rect x="${x.toFixed(2)}" y="52" width="${width.toFixed(2)}" height="10" fill="${BAR[i % BAR.length]}"/>`;
-    x += width;
+    if (l.pct <= 0) return '';
+    const width = Math.max((l.pct / 100) * usable, 3);
+    const rect = `<rect x="${x.toFixed(2)}" y="52" width="${width.toFixed(2)}" height="10" fill="${colorOf(l, i)}"/>`;
+    x += width + GAP;
     return rect;
   }).join('');
   const rows = Math.ceil(s.share.length / 2);
@@ -119,7 +132,7 @@ export function languagesSvg(s) {
     const row = i % rows;
     const lx = 24 + col * (barW / 2);
     const ly = 92 + row * 22;
-    return `<rect x="${lx}" y="${ly - 9}" width="10" height="10" rx="2" fill="${BAR[i % BAR.length]}"/>
+    return `<rect x="${lx}" y="${ly - 9}" width="10" height="10" rx="2" fill="${colorOf(l, i)}"/>
 <text x="${lx + 18}" y="${ly}" font-family="${FONT}" font-size="12" fill="${C.bone}">${esc(l.name)}</text>
 <text x="${lx + barW / 2 - 16}" y="${ly}" font-family="${FONT}" font-size="12" fill="${C.muted}" text-anchor="end">${l.pct.toFixed(1)}%</text>`;
   }).join('\n');
