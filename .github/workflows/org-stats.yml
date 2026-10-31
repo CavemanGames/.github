@@ -1,0 +1,45 @@
+name: org-stats
+
+# Rebuilds profile/stats.svg and profile/languages.svg every Monday and on demand.
+# Public repository: GitHub-hosted runners are free here and do not use the org's Actions budget.
+#
+# Private repositories are counted only if the ORG_STATS_TOKEN secret is set: a fine-grained
+# token owned by the CavemanGames org with "Metadata: read-only" on all repositories (nothing
+# else). Its source of truth is Doppler (workspace Caveman); GitHub keeps only the encrypted copy
+# Actions needs. Without it, the default token counts public repositories only.
+on:
+  schedule:
+    - cron: '17 9 * * 1'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['scripts/org-stats.mjs', '.github/workflows/org-stats.yml']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: org-stats
+  cancel-in-progress: true
+
+jobs:
+  stats:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Build cards
+        env:
+          GITHUB_TOKEN: ${{ secrets.ORG_STATS_TOKEN || github.token }}
+        run: node scripts/org-stats.mjs --org CavemanGames
+      - name: Commit if changed
+        run: |
+          git add profile/stats.svg profile/languages.svg
+          if git diff --cached --quiet; then echo "No changes."; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore: refresh org stats cards"
+          git push
