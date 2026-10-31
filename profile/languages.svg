@@ -2,14 +2,14 @@
 <title>~/cavemangames/languages</title>
 <rect x="0.5" y="0.5" width="479" height="143" rx="10" fill="#0B100C" stroke="#16321D"/>
 <text x="24" y="34" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#4E7359" letter-spacing="1.5">~/cavemangames/languages</text>
-<defs><clipPath id="r"><rect x="24" y="52" width="432" height="10" rx="5"/></clipPath></defs><g clip-path="url(#r)"><rect x="24.00" y="52" width="407.57" height="10" fill="#3EE06A"/><rect x="431.57" y="52" width="22.55" height="10" fill="#2BB352"/><rect x="454.11" y="52" width="2.00" height="10" fill="#1D8A3E"/></g>
-<rect x="24" y="83" width="10" height="10" rx="2" fill="#3EE06A"/>
+<defs><clipPath id="r"><rect x="24" y="52" width="432" height="10" rx="5"/></clipPath></defs><g clip-path="url(#r)"><rect x="24.00" y="52" width="403.79" height="10" fill="#22A84B"/><rect x="429.79" y="52" width="22.34" height="10" fill="#D55181"/><rect x="454.13" y="52" width="3.00" height="10" fill="#C98500"/></g>
+<rect x="24" y="83" width="10" height="10" rx="2" fill="#22A84B"/>
 <text x="42" y="92" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#C8E6CE">C++</text>
 <text x="224" y="92" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#96B79F" text-anchor="end">94.3%</text>
-<rect x="24" y="105" width="10" height="10" rx="2" fill="#2BB352"/>
+<rect x="24" y="105" width="10" height="10" rx="2" fill="#D55181"/>
 <text x="42" y="114" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#C8E6CE">C#</text>
 <text x="224" y="114" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#96B79F" text-anchor="end">5.2%</text>
-<rect x="240" y="83" width="10" height="10" rx="2" fill="#1D8A3E"/>
+<rect x="240" y="83" width="10" height="10" rx="2" fill="#C98500"/>
 <text x="258" y="92" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#C8E6CE">C</text>
 <text x="440" y="92" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#96B79F" text-anchor="end">0.4%</text>
 </svg>
